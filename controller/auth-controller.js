@@ -83,7 +83,7 @@ module.exports = {
             const user = await User.create(data);
 
             res.status(201).json({
-                message: "Data berhasil dibuat!",
+                message: "Akun berhasil dibuat!",
                 data: {
                     userId: user.id,
                     name: user.name,
