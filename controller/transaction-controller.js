@@ -14,7 +14,7 @@ exports.midtransChargeTransaction = async (req, res) => {
             .charge(req.body)
             .then((chargeResponse) => {
                 // console.log(chargeResponse);
-                Order.create({
+                Transaction.create({
                     order_id: chargeResponse.order_id,
                     name: req.body.name,
                     transaction_status: chargeResponse.transaction_status,
