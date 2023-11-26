@@ -1,59 +1,28 @@
-const Cart = require('../model/cart');
-require("dotenv").config();
-
-const postCart = async(req, res) => {
-    try {
-        const { name, user_id, product_id, product_detail, total, note } = req.body;
-        const cart = await Cart.create({ name, user_id, product_id, product_detail, total, note });
-        res.json(cart);
-      } catch (error) {
-        res.status(500).json({ error: error.message });
-      }
-}
-
-const getCartByUserId = async(req, res) => {
-    const userId = req.params.user_id;
-    try {
-      const carts = await Cart.findAll({ where: { user_id: userId } });
-      res.json(carts);
-    } catch (error) {
-      res.status(500).json({ error: error.message });
+'use strict';
+const {
+  Model
+} = require('sequelize');
+module.exports = (sequelize, DataTypes) => {
+  class cart extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
+    static associate(models) {
+      // define association here
     }
-}
-
-const updateCartById = async(req, res) => {
-    try {
-        const { id } = req.params;
-        const { name, user_id, product_id, product_detail, total, note } = req.body;
-        const [updatedRows] = await Cart.update({ name, user_id, product_id, product_detail, total, note }, { where: { id } });
-        if (updatedRows > 0) {
-          res.json({ message: 'Cart updated successfully' });
-        } else {
-          res.status(404).json({ message: 'Cart not found' });
-        }
-      } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
-}
-
-const deleteCartById = async(req, res) => {
-    try {
-        const { id } = req.params;
-        const deletedRows = await Cart.destroy({ where: { id } });
-        if (deletedRows > 0) {
-          res.json({ message: 'Cart deleted successfully' });
-        } else {
-          res.status(404).json({ message: 'Cart not found' });
-        }
-      } catch (error) {
-        res.status(500).json({ error: error.message });
-      }
-}
-
-module.exports = {
-    postCart,
-    getCartByUserId,
-    updateCartById,
-    deleteCartById,
-}
-    
+  }
+  cart.init({
+    name: DataTypes.STRING,
+    user_id: DataTypes.INTEGER,
+    product_id: DataTypes.INTEGER,
+    product_detail: DataTypes.INTEGER,
+    total: DataTypes.INTEGER,
+    note: DataTypes.TEXT
+  }, {
+    sequelize,
+    modelName: 'cart',
+  });
+  return cart;
+};
