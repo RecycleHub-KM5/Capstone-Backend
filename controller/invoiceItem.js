@@ -1,4 +1,4 @@
-const InvoiceItem = require('../model/invoiceItem');
+const InvoiceItem = require('../models/invoice_item');
 require("dotenv").config();
 
 // Create Invoice Item

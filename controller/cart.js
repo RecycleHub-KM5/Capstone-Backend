@@ -1,4 +1,4 @@
-const Cart = require('../model/cart');
+const Cart = require('../models/cart');
 require("dotenv").config();
 
 const postCart = async(req, res) => {

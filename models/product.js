@@ -14,12 +14,12 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   product.init({
-    name: DataTypes.STRING,
-    price: DataTypes.INTEGER,
-    decription: DataTypes.TEXT
-  }, {
-    sequelize,
-    modelName: 'product',
-  });
-  return product;
+  name: DataTypes.STRING,
+  price: DataTypes.INTEGER,
+  decription: DataTypes.TEXT
+}, {
+  sequelize,
+  modelName: 'product',
+});
+return product;
 };

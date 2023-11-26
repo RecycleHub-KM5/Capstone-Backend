@@ -1,4 +1,4 @@
-const Product = require('../model/product');
+const Product = require('../models/product');
 require("dotenv").config();
 
 const postProduct = async(req, res) => {

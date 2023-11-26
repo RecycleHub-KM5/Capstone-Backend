@@ -1,4 +1,4 @@
-const ProductDetail = require('../model/productDetail');
+const ProductDetail = require('../models/product_detail');
 require("dotenv").config();
 
 const postProductDetail = async(req, res) => {
