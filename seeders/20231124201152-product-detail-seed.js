@@ -12,7 +12,7 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-    queryInterface.bulkInsert('categories', [{
+    queryInterface.bulkInsert('product_details', [{
       name: 'Bunga putih',
       description:"Cocok ditempatkan di tembok sebagai pajangan",
       image: "https://cdn.discordapp.com/attachments/1153638653332029440/1164823607092969503/bunga1.png",
