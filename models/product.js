@@ -48,4 +48,7 @@ Product.init(
 Product.hasOne(ProductDetail, { foreignKey: "id_product" });
 ProductDetail.belongsTo(Product, { foreignKey: "id_product" });
 
+// Product.hasMany(ProductDetail);
+// Product.hasMany(ProductDetail);
+//
 module.exports = Product;

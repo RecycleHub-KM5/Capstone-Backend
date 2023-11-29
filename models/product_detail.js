@@ -27,6 +27,7 @@
 
 const { DataTypes, Model } = require("sequelize");
 const sequelize = require("./instance");
+const Transaction = require("./transaction");
 
 class ProductDetail extends Model {}
 
@@ -42,5 +43,10 @@ ProductDetail.init(
         modelName: "product_detail",
     }
 );
+
+ProductDetail.hasOne(Transaction, { foreignKey: "product_detail_id" });
+Transaction.belongsTo(ProductDetail, { foreignKey: "product_detail_id" });
+
+// Transaction.(Transaction, { foreignKey: "product_detail_id" });
 
 module.exports = ProductDetail;
