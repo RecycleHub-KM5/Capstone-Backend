@@ -5,7 +5,7 @@ require("dotenv").config();
 // Create Invoice
 const postInvoice = async(req, res) => {
     try {
-        const { user_id } = req.body;
+        const { user_id } = req.userId;
         const invoice = await Invoice.create({ user_id });
         res.json(invoice);
       } catch (error) {
@@ -42,7 +42,7 @@ const getInvoiceById = async(req, res) => {
 
 // Read All Invoice
 const getInvoiceByUserId = async(req, res) => {
-    const userId = req.params.user_id;
+    const userId = req.userId;
     try {
       const invoices = await Invoice.findAll({ where: { user_id: userId } });
       res.json(invoices);
