@@ -1,12 +1,11 @@
 const jwt = require('jsonwebtoken');
 const config = require('../config/configRoles.js');
-const User = require('../models').User;
 
 module.exports = {
 	verifyToken(req, res, next) {
-		let tokenHeader = req.headers['x-access-token'];
+		let tokenHeader = String(req.headers['authorization']);
 
-		if (tokenHeader.split(' ')[0] !== 'Bearer') {
+		if (tokenHeader.split(' ')[0] !== 'Bearer' ) {
 			return res.status(400).send({
 				auth: false,
 				message: "Error",
