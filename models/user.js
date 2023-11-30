@@ -10,7 +10,7 @@ User.init(
         email: DataTypes.STRING,
         password: DataTypes.STRING,
         avatar: DataTypes.STRING,
-        role: DataTypes.ENUM,
+        role: DataTypes.ENUM("user", "admin"),
         no_telp: DataTypes.STRING,
         address: DataTypes.TEXT,
         saldo: DataTypes.INTEGER,
