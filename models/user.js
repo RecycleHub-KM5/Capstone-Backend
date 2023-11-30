@@ -1,5 +1,6 @@
 const { DataTypes, Model } = require("sequelize");
 const sequelize = require("./instance");
+const Transaction = require("./transaction");
 
 class User extends Model {}
 
@@ -19,5 +20,8 @@ User.init(
         modelName: "user",
     }
 );
+
+User.hasOne(Transaction, { foreignKey: "user_id" });
+Transaction.belongsTo(User, { foreignKey: "user_id" });
 
 module.exports = User;
