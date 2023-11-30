@@ -27,7 +27,8 @@ exports.midtransSnapTransaction = async (req, res) => {
         Transaction.create({
             product_detail_id: req.body.product_detail_id,
             quantity: req.body.quantity,
-            total_price: req.body.total_price,
+            // total_price: req.body.total_price,
+            total_price: req.body.quantity * req.body.total_price,
             user_id: decodedToken.id,
             // status: createResponse.transaction_status,
         })
@@ -49,7 +50,7 @@ exports.midtransSnapTransaction = async (req, res) => {
         const parameter = {
             transaction_details: {
                 order_id: new Date(),
-                gross_amount: Number(req.body.total_price),
+                gross_amount: Number(req.body.quantity * req.body.total_price),
             },
             item_details: [
                 {
