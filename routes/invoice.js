@@ -7,7 +7,7 @@ route.post('/invoice',[verifyJwtTokenController.verifyToken], invoice.postInvoic
 route.get('/invoice',[verifyJwtTokenController.verifyToken, verifyJwtTokenController.isAdmin], invoice.getAllInvoice)
 route.get('/invoices/users',[verifyJwtTokenController.verifyToken], invoice.getInvoiceByUserId)
 route.get('/invoice/:id',[verifyJwtTokenController.verifyToken], invoice.getInvoiceById)
-route.put('/invoice/:id',[verifyJwtTokenController.verifyToken], invoice.updateInvoiceById)
-route.delete('/invoice/:id',[verifyJwtTokenController.verifyToken], invoice.deleteInvoiceById)
+route.put('/invoice/:id',[verifyJwtTokenController.verifyToken, verifyJwtTokenController.isAdmin], invoice.updateInvoiceById)
+route.delete('/invoice/:id',[verifyJwtTokenController.verifyToken, verifyJwtTokenController.isAdmin], invoice.deleteInvoiceById)
 
 module.exports = route;
