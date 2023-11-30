@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 const config = require('../config/configRoles.js');
-
+const User = require("../models/user");
 module.exports = {
 	verifyToken(req, res, next) {
 		let tokenHeader = String(req.headers['authorization']);
@@ -34,5 +34,20 @@ module.exports = {
 			req.userId = decoded.id;
 			next();
 		});
-	}
+	},
+	isAdmin(req, res, next) {
+		User.findByPk(req.userId)
+			.then(user => {
+				if (user.role.toUpperCase() === "ADMIN") {
+					next();
+					return;
+				}
+				res.status(403).send({
+					auth: false,
+					message: "Error",
+					message: 'Require Admin Role',
+				});
+				return;
+			})
+	},
 }
