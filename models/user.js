@@ -9,6 +9,7 @@ User.init(
         email: DataTypes.STRING,
         password: DataTypes.STRING,
         avatar: DataTypes.STRING,
+        role: DataTypes.ENUM,
         no_telp: DataTypes.STRING,
         address: DataTypes.TEXT,
         saldo: DataTypes.INTEGER,
