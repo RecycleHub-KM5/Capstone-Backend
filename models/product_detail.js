@@ -47,6 +47,4 @@ ProductDetail.init(
 ProductDetail.hasOne(Transaction, { foreignKey: "product_detail_id" });
 Transaction.belongsTo(ProductDetail, { foreignKey: "product_detail_id" });
 
-// Transaction.(Transaction, { foreignKey: "product_detail_id" });
-
 module.exports = ProductDetail;

@@ -3,6 +3,9 @@ const { coreApi } = require("../config/midtrans.config.js");
 const midtransClient = require("midtrans-client");
 const Transaction = require("../models/transaction.js");
 const jwt = require("jsonwebtoken");
+const ProductDetail = require("../models/product_detail.js");
+const User = require("../models/user.js");
+const Product = require("../models/product.js");
 require("dotenv").config();
 
 exports.midtransSnapTransaction = async (req, res) => {
@@ -91,5 +94,27 @@ exports.midtransSnapTransaction = async (req, res) => {
         });
     } catch (error) {
         return res.status(500).json({ success: false, message: error.message });
+    }
+};
+
+exports.getTransaction = async (req, res) => {
+    try {
+        const token = req.headers.authorization.split(" ")[1];
+        const decodedToken = jwt.verify(token, process.env.JWT_KEY);
+        const user_id = decodedToken.id;
+
+        const transaction = await Transaction.findAll({
+            where: { user_id: user_id },
+            include: [
+                {
+                    model: ProductDetail,
+                    include: [{ model: Product, attributes: ["id", "price"] }],
+                },
+                { model: User },
+            ],
+        });
+        res.json(transaction);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
     }
 };

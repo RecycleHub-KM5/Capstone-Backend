@@ -65,7 +65,4 @@ Transaction.init(
     }
 );
 
-// Transaction.hasOne(User, { foreignKey: "user_id" });
-// User.hasOne(Transaction, { foreignKey: "user_id" });
-
 module.exports = Transaction;

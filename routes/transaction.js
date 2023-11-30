@@ -1,7 +1,9 @@
 const express = require("express");
 const {
     midtransSnapTransaction,
+    getTransaction,
 } = require("../controller/transaction-controller");
+const verifyJwtTokenController = require("../controller/verify_jwt");
 const route = express.Router();
 
 // route.use(function (req, res, next) {
@@ -12,6 +14,16 @@ const route = express.Router();
 //     next();
 // });
 
-route.post("/proccess-transaction", midtransSnapTransaction);
+route.post(
+    "/proccess-transaction",
+    [verifyJwtTokenController.verifyToken],
+    midtransSnapTransaction
+);
+
+route.get(
+    "/transaction",
+    [verifyJwtTokenController.verifyToken],
+    getTransaction
+);
 
 module.exports = route;
