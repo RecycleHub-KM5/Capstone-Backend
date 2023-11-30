@@ -30,9 +30,6 @@ module.exports = {
             saldo: {
                 type: Sequelize.INTEGER,
             },
-            id_transaction: {
-                type: Sequelize.INTEGER,
-            },
             createdAt: {
                 allowNull: false,
                 type: Sequelize.DATE,

@@ -3,7 +3,8 @@ require("dotenv").config();
 
 const postCart = async(req, res) => {
     try {
-        const { name, user_id, product_id, product_detail, total, note } = req.body;
+        const user_id = req.userId
+        const { name, product_id, product_detail, total, note } = req.body;
         const cart = await Cart.create({ name, user_id, product_id, product_detail, total, note });
         res.json(cart);
       } catch (error) {
@@ -12,7 +13,7 @@ const postCart = async(req, res) => {
 }
 
 const getCartByUserId = async(req, res) => {
-    const userId = req.params.user_id;
+    const userId = req.userId;
     try {
       const carts = await Cart.findAll({ where: { user_id: userId } });
       res.json(carts);
