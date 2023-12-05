@@ -6,6 +6,7 @@ module.exports = {
         password: process.env.DB_PASSWORD,
         database: process.env.DB_NAME,
         host: process.env.DB_HOST,
+        dialectOption:{options:{requestTimeout:5000}},
         dialect: "mysql",
         dialectOptions: {
             supportBigNumbers: true,
