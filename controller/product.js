@@ -3,8 +3,8 @@ require("dotenv").config();
 
 const postProduct = async (req, res) => {
     try {
-        const { name, price, description } = req.body;
-        const product = await Product.create({ name, price, description });
+        const { name, price, description, thumbnail } = req.body;
+        const product = await Product.create({ name, price, description, thumbnail });
         res.json(product);
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -21,10 +21,10 @@ const getAllProduct = async (req, res) => {
 };
 
 const getProductById = async (req, res) => {
-    const productId = req.params.id;
+    const { id } = req.body;
 
     try {
-        const product = await Product.findByPk(productId);
+        const product = await Product.findByPk(id);
         if (product) {
             res.json(product);
         } else {
@@ -55,7 +55,7 @@ const updateProductById = async (req, res) => {
 
 const deleteProductById = async (req, res) => {
     try {
-        const { id } = req.params;
+        const { id } = req.body;
         const deletedRows = await Product.destroy({ where: { id } });
         if (deletedRows > 0) {
             res.json({ message: "Product deleted successfully" });
