@@ -13,16 +13,14 @@ module.exports = {
         if (!email || !password) {
             return res
                 .status(400)
-                .json({ message: "Data yang diisi tidak lengkap!" });
+                .json({ message: "Please fill the data completely!" });
         }
 
         try {
             const user = await User.findOne({ where: { email: data.email } });
 
             if (!user) {
-                return res
-                    .status(404)
-                    .json({ message: "Email tidak ditemukan!" });
+                return res.status(404).json({ message: "Email not found!" });
             }
 
             const passwordMatch = bcrypt.compareSync(
@@ -33,7 +31,7 @@ module.exports = {
             if (!passwordMatch) {
                 return res
                     .status(400)
-                    .json({ message: "Email atau password salah!" });
+                    .json({ message: "Email or password incorrect!" });
             }
 
             const token = jwt.sign(
@@ -42,7 +40,7 @@ module.exports = {
             );
 
             res.status(200).json({
-                message: "Berhasil login!",
+                message: "Login Successfully!",
                 data: {
                     userId: user.id,
                     name: user.name,
@@ -51,7 +49,7 @@ module.exports = {
             });
         } catch (error) {
             res.status(500).json({
-                message: "Login gagal!",
+                message: "Login failed!",
                 error: error.message,
             });
         }
@@ -63,7 +61,7 @@ module.exports = {
         if (!name || !email || !password) {
             return res
                 .status(400)
-                .json({ message: "Data yang diisi tidak lengkap!" });
+                .json({ message: "Please fill the data completely!" });
         }
 
         try {
@@ -74,7 +72,7 @@ module.exports = {
             if (checkEmail) {
                 return res
                     .status(409)
-                    .json({ message: "Email sudah digunakan" });
+                    .json({ message: "Email is already in use!" });
             }
 
             const hashPassword = bcrypt.hashSync(data.password, saltRounds);
@@ -83,7 +81,7 @@ module.exports = {
             const user = await User.create(data);
 
             res.status(201).json({
-                message: "Akun berhasil dibuat!",
+                message: "Account created successfully!",
                 data: {
                     userId: user.id,
                     name: user.name,
@@ -92,7 +90,7 @@ module.exports = {
             });
         } catch (error) {
             res.status(500).json({
-                message: "Register gagal!",
+                message: "Register failed!",
                 error: error.message,
             });
         }
