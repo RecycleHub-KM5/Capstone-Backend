@@ -7,12 +7,14 @@ const cartRoute = require("./cart");
 const invoiceRoute = require("./invoice");
 const invoiceItemRoute = require("./invoiceItem");
 const transactionRoute = require("./transaction");
+const userRoute = require("./user-route");
 
 route.get("/", (req, res) => {
     res.send("Welcome to API RecycleHub");
 });
 
 route.use("/api/users/auth", authRoute);
+route.use("/api", userRoute);
 route.use("/api", productRoute);
 route.use("/api", productDetailRoute);
 route.use("/api", cartRoute);
