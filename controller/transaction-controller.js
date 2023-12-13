@@ -87,7 +87,7 @@ exports.midtransSnapTransaction = async (req, res) => {
             const token = snapResponse.token;
 
             res.status(200).json({
-                message: "Berhasil melakukan pembayaran",
+                message: "Payment Success.",
                 dataPayment,
                 token: token,
             });
