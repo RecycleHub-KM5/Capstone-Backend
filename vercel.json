@@ -1,0 +1,14 @@
+{
+    "builds": [
+        {
+            "src": "app.js",
+            "use": "@now/node"
+        }
+    ],
+    "routes": [
+        {
+            "src": "/api/(.*)",
+            "dest": "/routes/index.js"
+        }
+    ]
+}
